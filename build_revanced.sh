@@ -31,9 +31,7 @@ artifacts["apkeep"]="EFForg/apkeep apkeep-x86_64-unknown-linux-gnu"
 get_artifact_download_url() {
     # Usage: get_download_url <repo_name> <artifact_name> <file_type>
     local api_url result
-    api_url="https://api.github.com/repos/$1/releases/download/v2.14.0"
-    api_url="https://api.github.com/repos/$1/releases/download/v0.55.0"
-    api_url="https://api.github.com/repos/$1/releases/download/v2.64.0"
+    api_url="https://api.github.com/repos/$1/releases/latest"
     # shellcheck disable=SC2086
     result=$(curl -s $api_url | jq ".assets[] | select(.name | contains(\"$2\") and contains(\"$3\") and (contains(\".sig\") | not)) | .browser_download_url")
     echo "${result:1:-1}"
